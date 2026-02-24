@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bike Portal</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ===== Login Popup CSS ===== */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .popup-box {
+            background: #fff;
+            width: 320px;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .popup-box h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .popup-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
+
+        .popup-box button {
+            width: 100%;
+            padding: 10px;
+            background: #ff5a5f;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            color: red;
+        }
+
+        .switch {
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>🏍</span>
+        <span>BikePortal</span>
+    </div>
+
+    <div class="search-container">
+        <input type="text" placeholder="Search Bike or Scooters">
+    </div>
+
+    <div class="nav-right">
+        <div class="language">English ▼</div>
+        <!-- CLICKABLE LOGIN -->
+        <div class="login" onclick="openLogin()">👤 Login / Register</div>
+    </div>
+
+</header>
+
+<!-- ===== LOGIN POPUP ===== -->
+<div class="popup" id="loginPopup">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">✖</span>
+        <h2>Login</h2>
+        <input type="text" placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button>Login</button>
+        <div class="switch" onclick="openRegister()">New user? Register</div>
+    </div>
+</div>
+
+<!-- ===== REGISTER POPUP ===== -->
+<div class="popup" id="registerPopup">
+    <div class="popup-box">
+        <span class="close-btn" onclick="closePopup()">✖</span>
+        <h2>Register</h2>
+        <input type="text" placeholder="Username">
+        <input type="email" placeholder="Email">
+        <input type="password" placeholder="Password">
+        <button>Register</button>
+        <div class="switch" onclick="openLogin()">Already have account? Login</div>
+    </div>
+</div>
+
+<section class="bike-section">
+    <div class="bike-content-box">
+        <h1>Find Your Perfect Bike</h1>
+
+        <div class="search-bar">
+            <input type="text" placeholder="Search bikes by name, model...">
+            <button>Search</button>
+        </div>
+
+        <div class="search-options">
+            <button>Search by Brand</button>
+            <button>Search by Budget</button>
+        </div>
+    </div>
+</section>
+
+<!-- bike spotlight section -->
+<section class="spotlight-section">
+
+    <h2>Bikes in Spotlight</h2>
+
+    <div class="spotlight-frame">
+        <div class="bike-cards">
+
+            {% for bike in bikes %}
+            <div class="bike-card">
+                <img src="{{ url_for('static', filename='images/' + bike[3]) }}">
+                <h3>{{ bike[1] }}</h3>
+                <p>₹{{ bike[2] }} Onwards</p>
+                <button class="offer-btn">Get Offers</button>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</section>
+
+<!-- ===== JS ===== -->
+<script>
+function openLogin() {
+    document.getElementById("loginPopup").style.display = "block";
+    document.getElementById("registerPopup").style.display = "none";
+}
+
+function openRegister() {
+    document.getElementById("registerPopup").style.display = "block";
+    document.getElementById("loginPopup").style.display = "none";
+}
+
+function closePopup() {
+    document.getElementById("loginPopup").style.display = "none";
+    document.getElementById("registerPopup").style.display = "none";
+}
+</script>
+
+</body>
+</html>

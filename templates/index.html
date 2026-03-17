@@ -241,18 +241,16 @@ window.location.href="/search?bike="+value;
 }
 }
 
-/* search brand */
 function searchBrand(){
 let brand=document.getElementById("brandSelect").value;
 if(brand!=""){
-window.location.href="/search_brand?brand="+brand;
+window.location.href="/brand?brand="+brand;
 }
 }
 
-/* search budget */
 function searchBudget(){
 let budget=document.getElementById("budgetSlider").value;
-window.location.href="/search_budget?price="+budget;
+window.location.href="/budget?price="+budget;
 }
 
 </script>

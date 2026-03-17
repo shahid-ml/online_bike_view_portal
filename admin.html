@@ -1,0 +1,7 @@
+<h1>Admin Panel</h1>
+
+<a href="/add-bike">Add Bike</a>
+
+{% for bike in bikes %}
+<p>{{ bike[1] }} - {{ bike[2] }}</p>
+{% endfor %}

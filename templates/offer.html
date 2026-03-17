@@ -1,0 +1,145 @@
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<title>Bike Offer</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    text-align:center;
+    padding-top:80px;
+}
+
+/* TOP FILTER MENU */
+
+.menu{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.2);
+    padding:15px;
+}
+
+.menu a{
+    margin:10px;
+    text-decoration:none;
+    font-weight:bold;
+    color:#333;
+}
+
+/* DROPDOWN */
+
+.dropdown{
+    display:inline-block;
+    position:relative;
+}
+
+.dropdown-content{
+    display:none;
+    position:absolute;
+    background:white;
+    box-shadow:0 5px 10px rgba(0,0,0,0.2);
+    padding:10px;
+}
+
+.dropdown-content a{
+    display:block;
+    padding:8px;
+}
+
+.dropdown:hover .dropdown-content{
+    display:block;
+}
+
+/* BIKE CARD */
+
+.offer-box{
+    width:350px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+.offer-box img{
+    width:100%;
+    border-radius:6px;
+}
+
+button{
+    margin-top:15px;
+    padding:10px 20px;
+    background:#ff4d30;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FILTER MENU -->
+
+<div class="menu">
+
+<div class="dropdown">
+<a href="#">Bikes</a>
+
+<div class="dropdown-content">
+<a href="/category/100cc">100cc</a>
+<a href="/category/125cc">125cc</a>
+<a href="/category/150cc">150cc</a>
+<a href="/category/200cc">200cc</a>
+<a href="/category/300cc">300cc</a>
+</div>
+
+</div>
+
+<div class="dropdown">
+<a href="#">Scooters</a>
+
+<div class="dropdown-content">
+<a href="/category/110cc">110cc</a>
+<a href="/category/125cc">125cc</a>
+<a href="/category/Electric">Electric</a>
+</div>
+
+</div>
+
+</div>
+
+
+<!-- BIKE CARD -->
+
+{% if bike %}
+
+<div class="offer-box">
+
+<img src="{{ url_for('static', filename='images/' ~ bike[4]) }}">
+
+<h2>{{ bike[1] }}</h2>
+
+<h3>₹{{ bike[3] }}</h3>
+
+<p>Special Discount Available!</p>
+
+<button>Contact Dealer</button>
+
+</div>
+
+{% else %}
+
+<h2>No Bike Found</h2>
+
+{% endif %}
+
+</body>
+</html> -->

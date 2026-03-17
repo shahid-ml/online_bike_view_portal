@@ -1,77 +1,87 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-    <title>Bike Portal</title>
+<title>Bike Portal</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-/* ===== POPUP ===== */
-.popup{
-display:none;
-position:fixed;
-top:0;left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.5);
-z-index:1000;
+/* ===== Login Popup CSS ===== */
+.popup {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0,0,0,0.5);
+z-index: 1000;
 }
 
-.popup-box{
-background:#fff;
-width:320px;
-margin:100px auto;
-padding:20px;
-border-radius:10px;
-position:relative;
-animation:pop .3s ease;
+.popup-box {
+background: #fff;
+width: 320px;
+margin: 100px auto;
+padding: 20px;
+border-radius: 8px;
+position: relative;
 }
 
-@keyframes pop{
-from{transform:scale(.7);opacity:0;}
-to{transform:scale(1);}
+.popup-box h2 {
+text-align: center;
+margin-bottom: 15px;
 }
 
-.popup-box input{
-width:100%;
-padding:10px;
-margin:8px 0;
+.popup-box input {
+width: 100%;
+padding: 10px;
+margin: 8px 0;
 }
 
-.popup-box button{
-width:100%;
-padding:10px;
-background:#ff4d30;
-color:white;
-border:none;
-cursor:pointer;
-border-radius:6px;
+.popup-box button {
+width: 100%;
+padding: 10px;
+background: #ff5a5f;
+color: white;
+border: none;
+cursor: pointer;
+margin-top: 10px;
 }
 
-.close-btn{
-position:absolute;
-top:8px;
-right:12px;
-cursor:pointer;
-font-size:18px;
-color:red;
+.close-btn {
+position: absolute;
+top: 10px;
+right: 15px;
+cursor: pointer;
+font-size: 18px;
+color: red;
 }
 
-.switch{
-text-align:center;
-margin-top:10px;
-color:blue;
-cursor:pointer;
+.switch {
+text-align: center;
+margin-top: 10px;
+cursor: pointer;
+color: blue;
+}
+
+/* search options */
+#brandOptions, #budgetOptions{
+margin-top:15px;
+}
+
+#budgetSlider{
+width:80%;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
 <header class="navbar">
 
 <div class="logo">
@@ -80,9 +90,7 @@ cursor:pointer;
 </div>
 
 <div class="search-container">
-<form action="/" method="GET">
-<input type="text" name="search" placeholder="Search Bike...">
-</form>
+<input type="text" placeholder="Search Bike or Scooters">
 </div>
 
 <div class="nav-right">
@@ -92,75 +100,79 @@ cursor:pointer;
 
 </header>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN POPUP -->
+
 <div class="popup" id="loginPopup">
 <div class="popup-box">
-
 <span class="close-btn" onclick="closePopup()">✖</span>
-
-<form action="/login" method="POST">
-
 <h2>Login</h2>
-
-<input name="username" placeholder="Username" required>
-
-<input name="password" type="password" placeholder="Password" required>
-
-<button type="submit">Login</button>
-
-</form>
-
-<div class="switch" onclick="openRegister()">
-New user? Register
-</div>
-
+<input type="text" placeholder="Username">
+<input type="password" placeholder="Password">
+<button>Login</button>
+<div class="switch" onclick="openRegister()">New user? Register</div>
 </div>
 </div>
 
-<!-- ================= REGISTER ================= -->
+<!-- REGISTER POPUP -->
+
 <div class="popup" id="registerPopup">
 <div class="popup-box">
-
 <span class="close-btn" onclick="closePopup()">✖</span>
-
-<form action="/register" method="POST">
-
 <h2>Register</h2>
-
-<input name="username" placeholder="Username" required>
-
-<input name="email" type="email" placeholder="Email" required>
-
-<input name="password" type="password" placeholder="Password" required>
-
-<button type="submit">Register</button>
-
-</form>
-
-<div class="switch" onclick="openLogin()">
-Already have account? Login
-</div>
-
+<input type="text" placeholder="Username">
+<input type="email" placeholder="Email">
+<input type="password" placeholder="Password">
+<button>Register</button>
+<div class="switch" onclick="openLogin()">Already have account? Login</div>
 </div>
 </div>
 
-<!-- ================= HERO ================= -->
 <section class="bike-section">
 <div class="bike-content-box">
 
 <h1>Find Your Perfect Bike</h1>
 
 <div class="search-bar">
-<form action="/" method="GET">
-<input type="text" name="search" placeholder="Search bikes...">
-<button type="submit">Search</button>
-</form>
+<input type="text" id="searchInput" placeholder="Search bikes by name, model...">
+<button onclick="searchBike()">Search</button>
+</div>
+
+<div class="search-options">
+<button onclick="showBrand()">Search by Brand</button>
+<button onclick="showBudget()">Search by Budget</button>
+</div>
+
+<!-- Brand Options -->
+
+<div id="brandOptions" style="display:none;">
+<select id="brandSelect">
+<option value="">Select Brand</option>
+<option>Hero</option>
+<option>Honda</option>
+<option>Bajaj</option>
+<option>TVS</option>
+<option>Yamaha</option>
+<option>Royal Enfield</option>
+</select>
+
+<button onclick="searchBrand()">Search</button>
+
+</div>
+
+<!-- Budget Slider -->
+
+<div id="budgetOptions" style="display:none;">
+<label>Budget: ₹<span id="budgetValue">50000</span></label><br>
+<input type="range" id="budgetSlider" min="50000" max="500000" step="10000" value="50000">
+<br><br>
+<button onclick="searchBudget()">Search</button>
 </div>
 
 </div>
 </section>
 
-<!-- ================= BIKES ================= -->
+<!-- bike spotlight section -->
+
 <section class="spotlight-section">
 
 <h2>Bikes in Spotlight</h2>
@@ -169,20 +181,12 @@ Already have account? Login
 <div class="bike-cards">
 
 {% for bike in bikes %}
+
 <div class="bike-card">
-
-<img src="{{ url_for('static', filename='images/' ~ bike[3]) }}">    <!--Ye wali line mai error find karra . showing issue in displaying bike images -->
-
+<img src="{{ url_for('static', filename='images/' ~ bike[3]) }}">
 <h3>{{ bike[1] }}</h3>
-
 <p>₹{{ bike[2] }} Onwards</p>
-
-<a href="/offer/{{ bike[0] }}">
-<button class="offer-btn">
-Get Offers
-</button>
-</a>
-
+<button class="offer-btn">Get Offers</button>
 </div>
 {% endfor %}
 
@@ -191,9 +195,9 @@ Get Offers
 
 </section>
 
-<!-- ================= JS ================= -->
 <script>
 
+/* popup */
 function openLogin(){
 document.getElementById("loginPopup").style.display="block";
 document.getElementById("registerPopup").style.display="none";
@@ -209,11 +213,46 @@ document.getElementById("loginPopup").style.display="none";
 document.getElementById("registerPopup").style.display="none";
 }
 
-/* click outside close */
-window.onclick=function(e){
-if(e.target.classList.contains("popup")){
-closePopup();
+/* show brand */
+function showBrand(){
+document.getElementById("brandOptions").style.display="block";
+document.getElementById("budgetOptions").style.display="none";
 }
+
+/* show budget */
+function showBudget(){
+document.getElementById("budgetOptions").style.display="block";
+document.getElementById("brandOptions").style.display="none";
+}
+
+/* budget slider */
+let slider=document.getElementById("budgetSlider");
+let output=document.getElementById("budgetValue");
+
+slider.oninput=function(){
+output.innerHTML=this.value;
+}
+
+/* search bike */
+function searchBike(){
+let value=document.getElementById("searchInput").value;
+if(value!=""){
+window.location.href="/search?bike="+value;
+}
+}
+
+/* search brand */
+function searchBrand(){
+let brand=document.getElementById("brandSelect").value;
+if(brand!=""){
+window.location.href="/search_brand?brand="+brand;
+}
+}
+
+/* search budget */
+function searchBudget(){
+let budget=document.getElementById("budgetSlider").value;
+window.location.href="/search_budget?price="+budget;
 }
 
 </script>

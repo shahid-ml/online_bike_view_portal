@@ -173,26 +173,23 @@ width:80%;
 
 <!-- bike spotlight section -->
 
+<!-- bike spotlight section -->
 <section class="spotlight-section">
-
 <h2>Bikes in Spotlight</h2>
-
 <div class="spotlight-frame">
 <div class="bike-cards">
 
 {% for bike in bikes %}
-
 <div class="bike-card">
-<img src="{{ url_for('static', filename='images/' ~ bike[3]) }}">
-<h3>{{ bike[1] }}</h3>
-<p>₹{{ bike[2] }} Onwards</p>
-<button class="offer-btn">Get Offers</button>
+    <img src="{{ url_for('static', filename='images/' ~ bike[4]) }}">  <!-- image is 5th column (index 4) -->
+    <h3>{{ bike[1] }}</h3>  <!-- bike_name is 2nd column (index 1) -->
+    <p>₹{{ bike[3] }} Onwards</p>  <!-- price is 4th column (index 3) -->
+    <a href="/offer/{{ bike[0] }}"><button class="offer-btn">Get Offers</button></a>  <!-- id is 1st column (index 0) -->
 </div>
 {% endfor %}
 
 </div>
 </div>
-
 </section>
 
 <script>
@@ -241,16 +238,18 @@ window.location.href="/search?bike="+value;
 }
 }
 
+/* search brand */
 function searchBrand(){
 let brand=document.getElementById("brandSelect").value;
 if(brand!=""){
-window.location.href="/brand?brand="+brand;
+window.location.href="/search_brand?brand="+brand;
 }
 }
 
+/* search budget */
 function searchBudget(){
 let budget=document.getElementById("budgetSlider").value;
-window.location.href="/budget?price="+budget;
+window.location.href="/search_budget?price="+budget;
 }
 
 </script>

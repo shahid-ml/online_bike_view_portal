@@ -9,7 +9,7 @@ conn = psycopg2.connect(
     host="localhost",
     database="online_bike_portal",
     user="postgres",
-    password="root"
+    password="011983"
 )
 
 # ---------------- HOME PAGE ----------------
@@ -33,6 +33,24 @@ def home():
 
     return render_template("index.html", bikes=bikes)
 
+#----search-----
+
+@app.route('/search')
+def search_bike():
+    print("SEARCH ROUTE HIT")   # 🔥 debug line
+
+    value = request.args.get('bike')
+    print("Search value:", value)
+
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT * FROM bikes WHERE LOWER(bike_name) LIKE %s",
+        ('%' + value.lower() + '%',)
+    )
+
+    bikes = cur.fetchall()
+    return render_template('index.html', bikes=bikes)
+
 
 # ---------------- OFFER PAGE ----------------
 @app.route("/offer/<int:bike_id>")
@@ -52,21 +70,20 @@ def offer_page(bike_id):
 
 
 # ---------------- BRAND SEARCH ----------------
-@app.route("/brand")
-def brand():
-
-    brand = request.args.get("brand")
-
+@app.route('/brand')
+@app.route('/brand/<brand_name>')
+def bikes_by_brand(brand_name=None):
     cur = conn.cursor()
-    cur.execute(
-        "SELECT * FROM bikes WHERE brand ILIKE %s",
-        ('%' + brand + '%',)
-    )
+
+    if not brand_name:
+        brand_name = request.args.get('brand')
+
+    query = "SELECT * FROM bikes WHERE LOWER(brand) LIKE %s"
+    cur.execute(query, ('%' + brand_name.lower() + '%',))
 
     bikes = cur.fetchall()
-    cur.close()
 
-    return render_template("index.html", bikes=bikes)
+    return render_template('index.html', bikes=bikes)
 
 
 # ---------------- BUDGET SEARCH ----------------
@@ -154,3 +171,19 @@ def category(cc):
 # ---------------- RUN SERVER ----------------
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+# ----------------cirlce logo-----------
+@app.route('/brand/<brand_name>')
+def bikes_by_brand(brand_name):
+    cur = conn.cursor()
+
+    query = "SELECT * FROM bikes WHERE LOWER(brand) LIKE %s"
+    cur.execute(query, ('%' + brand_name.lower() + '%',))
+
+    bikes = cur.fetchall()
+
+    return render_template('index.html', bikes=bikes)
+
+
+

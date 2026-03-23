@@ -300,18 +300,19 @@ width:80%;
 
 <!-- Brand Options -->
 
-<div id="brandOptions" style="display:none;">
-<select id="brandSelect">
-<option value="">Select Brand</option>
-<option>Hero</option>
-<option>Honda</option>
-<option>Bajaj</option>
-<option>TVS</option>
-<option>Yamaha</option>
-<option>Royal Enfield</option>
-</select>
+<div id="brandOptions" class="brand-box">
 
-<button onclick="searchBrand()">Search</button>
+    <select id="brandSelect">
+        <option value="">Select Brand</option>
+        <option>Hero</option>
+        <option>Honda</option>
+        <option>Bajaj</option>
+        <option>TVS</option>
+        <option>Yamaha</option>
+        <option>Royal Enfield</option>
+    </select>
+
+    <button onclick="searchBrand()">Search</button>
 
 </div>
 
@@ -359,28 +360,34 @@ width:80%;
 
 
 
-
-<!-- LEFT SIDE CIRCLES -->
+<!-- bike side circle -->
 <div class="side-images left-side">
+    <a href="/brand/Yamaha">
+        <img src="{{ url_for('static', filename='images/yamahalogo.jpg') }}">
+    </a>
 
-<img src="{{ url_for('static', filename='images/benelilogo.jpg') }}">
-<img src="{{ url_for('static', filename='images/tvslogo.jpg') }}">
-<img src="{{ url_for('static', filename='images/herologo.jpg') }}">
-<img src="{{ url_for('static', filename='images/suzukilogo.jpg') }}">
+    <a href="/brand/KTM">
+        <img src="{{ url_for('static', filename='images/ktmlogo.jpg') }}">
+    </a>
 
+    <a href="/brand/Royal Enfield">
+        <img src="{{ url_for('static', filename='images/relogo.jpg') }}">
+    </a>
 </div>
 
-
-<!-- RIGHT SIDE CIRCLES -->
 <div class="side-images right-side">
+    <a href="/brand/Suzuki">
+        <img src="{{ url_for('static', filename='images/suzukilogo.jpg') }}">
+    </a>
 
-<img src="{{ url_for('static', filename='images/relogo.jpg') }}">
-<img src="{{ url_for('static', filename='images/yamahalogo.jpg') }}">
-<img src="{{ url_for('static', filename='images/harleylogo.jpg') }}">
-<img src="{{ url_for('static', filename='images/ktmlogo.jpg') }}">
+    <a href="/brand/TVS">
+        <img src="{{ url_for('static', filename='images/tvslogo.jpg') }}">
+    </a>
 
+    <a href="/brand/Benelli">
+        <img src="{{ url_for('static', filename='images/benelilogo.jpg') }}">
+    </a>
 </div>
-
 
 
 

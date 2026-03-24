@@ -291,3 +291,54 @@ body {
   background: red;
   color: white;
 }
+
+.side-images img{
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    object-fit:contain;   /* 🔥 IMPORTANT FIX */
+    background:white;     /* keeps logo visible */
+    padding:15px;         /* space inside circle */
+}
+
+.brand-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* dropdown */
+#brandSelect {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 2px solid #ff4d30;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    background: white;
+    transition: 0.3s;
+}
+
+#brandSelect:hover {
+    border-color: #ff7a18;
+}
+
+/* search button */
+.brand-box button {
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #ff4d30, #ff7a18);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* hover effect */
+.brand-box button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,77,48,0.4);
+}

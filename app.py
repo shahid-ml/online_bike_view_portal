@@ -9,7 +9,7 @@ conn = psycopg2.connect(
     host="localhost",
     database="online_bike_portal",
     user="postgres",
-    password="011983"
+    password="root"
 )
 
 # ---------------- HOME PAGE ----------------

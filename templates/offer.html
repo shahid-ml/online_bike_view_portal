@@ -11,10 +11,24 @@
     box-sizing: border-box;
 }
 
+
+
 body{
     font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f0f2f5;
+    background: #0f0f0f;
+    color: white;
 }
+
+.bike-detail-card {
+    background: #1b1b1b;
+}
+.image-gallery {
+    background: #111;
+}
+.dealer-contact {
+    background: #1a1a1a;
+}
+
 
 /* TOP FILTER MENU */
 .menu{
@@ -134,6 +148,41 @@ body{
 .bike-info {
     padding: 20px;
 }
+
+
+.emi-box{
+    background:#111;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+    box-shadow:0 0 10px rgba(255,77,48,0.3);
+}
+
+.emi-box input, .emi-box select{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:none;
+    border-radius:5px;
+}
+
+.emi-box button{
+    width:100%;
+    padding:10px;
+    background:#ff4d30;
+    color:white;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.emi-box p{
+    margin-top:10px;
+    font-weight:bold;
+    color:#00ffcc;
+}
+
+
 
 .bike-title {
     font-size: 32px;
@@ -334,6 +383,24 @@ body{
 }
 
 </style>
+
+<script>
+function calculateEMI(){
+    let price = {{ bike[3] }};
+    let down = parseInt(document.getElementById("downPayment").value) || 0;
+    let years = parseInt(document.getElementById("years").value);
+
+    let loan = price - down;
+    let months = years * 12;
+
+    let emi = loan / months;
+
+    document.getElementById("emiResult").innerHTML =
+        "Monthly EMI: ₹" + Math.round(emi) + " for " + months + " months";
+}
+</script>
+
+
 </head>
 <body>
 
@@ -385,6 +452,32 @@ body{
         </div>
     </div>
     
+
+
+
+<div class="emi-box">
+    <h3>💰 EMI Calculator</h3>
+
+    <label>Down Payment</label>
+    <input type="number" id="downPayment" placeholder="Enter amount">
+
+    <label>Tenure (Years)</label>
+    <select id="years">
+        <option value="1">1 Year</option>
+        <option value="2">2 Years</option>
+        <option value="3">3 Years</option>
+        <option value="4">4 Years</option>
+    </select>
+
+    <button onclick="calculateEMI()">Calculate</button>
+
+    <p id="emiResult"></p>
+</div>
+
+
+
+
+
     <!-- Bike Info Section -->
 <div class="bike-info">
     <span class="offer-tag">🔥 Special Offer</span>

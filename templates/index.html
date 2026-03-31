@@ -214,10 +214,16 @@ width:80%;
 <div class="search-container">
 <input type="text" placeholder="🏍️𝐎𝐍𝐋𝐈𝐍𝐄-𝐁𝐈𝐊𝐄-𝐕𝐈𝐄𝐖-𝐏𝐎𝐑𝐓𝐀𝐋🏍️">
 </div>
-
 <div class="nav-right">
-<div class="language">English ▼</div>
-<div class="login" onclick="openLogin()">👤 Login / Register</div>
+
+    <!-- CART BUTTON -->
+    <a href="/cart" class="cart-btn">
+        🛒 Cart
+    </a>
+
+    <div class="language">English ▼</div>
+    <div class="login" onclick="openLogin()">👤 Login / Register</div>
+
 </div>
 
 </header>
@@ -229,6 +235,14 @@ width:80%;
 <span class="close-btn" onclick="closePopup()">✖</span>
 <h2>Login</h2>
 <input type="text" placeholder="Username">
+<form method="POST" action="/login">
+
+<input type="text" name="username" placeholder="Username">
+<input type="password" name="password" placeholder="Password">
+
+<button type="submit">Login</button>
+
+</form>
 <input type="password" placeholder="Password">
 <button>Login</button>
 <div class="switch" onclick="openRegister()">New user? Register</div>
@@ -242,6 +256,15 @@ width:80%;
 <span class="close-btn" onclick="closePopup()">✖</span>
 <h2>Register</h2>
 <input type="text" placeholder="Username">
+<form method="POST" action="/register">
+
+<input type="text" name="username" placeholder="Username">
+<input type="email" name="email" placeholder="Email">
+<input type="password" name="password" placeholder="Password">
+
+<button type="submit">Register</button>
+
+</form>
 <input type="email" placeholder="Email">
 <input type="password" placeholder="Password">
 <button>Register</button>
@@ -400,7 +423,7 @@ function searchBrand(){
 let brand=document.getElementById("brandSelect").value;
 
 if(brand!=""){
-window.location.href="/brand?brand="+brand;
+window.location.href="/brand/"+brand;
 }
 }
 

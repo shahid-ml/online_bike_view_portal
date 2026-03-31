@@ -3,6 +3,7 @@
 <head>
 <title>Bike Offer - {{ bike[1] }}</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <style>
 
 * {
@@ -401,6 +402,16 @@ body{
     color: white;
 }
 
+.contact-btn{
+    background:#ff4d30;
+    color:white;
+    border:none;
+}
+
+.contact-btn:hover{
+    background:#e63e21;
+    transform:translateY(-2px);
+}
 @media (max-width: 768px) {
     .bike-detail-card {
         grid-template-columns: 1fr;
@@ -547,16 +558,23 @@ function calculateEMI(){
             <p><i class="fas fa-envelope"></i> sales@bikeportal.com</p>
         </div>
         
-        <!-- Action Buttons -->
-        <div class="action-buttons">
-            <button class="btn btn-primary" onclick="contactDealer()">
-                <i class="fas fa-whatsapp"></i> Contact Dealer
-            </button>
-            <button class="btn btn-secondary" onclick="bookTestRide()">
-                <i class="fas fa-calendar-check"></i> Book Test Ride
-            </button>
-        </div>
-    </div>
+ <div class="action-buttons">
+
+    <a href="/add_to_cart/{{ bike[0] }}">
+        <button class="btn btn-primary">
+            🛒 Add to Cart
+        </button>
+    </a>
+
+    <!-- CONTACT DEALER BUTTON -->
+    <button class="btn contact-btn" onclick="contactDealer()">
+        <i class="fab fa-whatsapp"></i> Contact Dealer
+    </button>
+
+    <button class="btn btn-secondary" onclick="bookTestRide()">
+        <i class="fas fa-calendar-check"></i> Book Test Ride
+    </button>
+
 </div>
 
 {% else %}

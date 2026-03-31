@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect,session
+from flask import Flask, render_template, request, redirect, session, url_for
 import psycopg2
 
 app = Flask(__name__)
@@ -316,6 +316,40 @@ def category(cc):
     cur.close()
 
     return render_template("index.html", bikes=bikes)
+
+
+@app.before_request
+def make_cart():
+    if "cart" not in session:
+        session["cart"] = []
+
+@app.route("/add_to_cart/<int:bike_id>")
+def add_to_cart(bike_id):
+
+    cart = session.get("cart", [])
+
+    # duplicate avoid
+    if bike_id not in cart:
+        cart.append(bike_id)
+
+    session["cart"] = cart
+
+    return redirect(url_for("cart"))
+@app.route("/cart")
+def cart():
+
+    cart_ids = session.get("cart", [])
+
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM bikes WHERE id = ANY(%s)", (cart_ids,))
+    cart_bikes = cur.fetchall()
+    cur.close()
+
+    return render_template("cart.html", bikes=cart_bikes)
+
+@app.route("/contact_dealer")
+def contact_dealer():
+    return "<h2>Dealer will contact you soon ✅</h2>"
 
 
 # ---------------- RUN SERVER ----------------

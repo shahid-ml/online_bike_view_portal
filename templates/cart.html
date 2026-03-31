@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+    <style>
+        body{
+            font-family: Arial;
+            background:#0f0f0f;
+            color:white;
+            padding:40px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        /* .cart-container{
+            max-width:900px;
+            margin:auto;
+        } */
+        .cart-item{
+            background:#111;
+            border:2px solid #ff4d30;
+            border-radius:15px;
+            padding:20px;
+            margin:20px auto;
+            width:70%;
+            display:flex;
+            align-items:center;
+            gap:20px;
+            box-shadow:0 0 20px rgba(255,77,48,0.3);
+        }
+
+        .cart-item img{
+            width:120px;
+            border-radius:10px;
+        }
+
+        .cart-item h3{
+            color:white;
+        }
+
+        .cart-item a{
+            color:#ff4d30;
+            text-decoration:none;
+            font-weight:bold;
+        }
+        .bike-card{
+            background:#1b1b1b;
+            padding:20px;
+            margin:15px 0;
+            border-radius:10px;
+            display:flex;
+            align-items:center;
+            gap:20px;
+        }
+
+        img{
+            width:150px;
+            border-radius:10px;
+            background:white;
+        }
+
+        a{
+            color:#ff4d30;
+            text-decoration:none;
+        }
+
+        .empty{
+            text-align:center;
+            margin-top:50px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🛒 Your Cart</h1>
+
+<div class="cart-container">
+
+{% if bikes %}
+
+    {% for bike in bikes %}
+    <div class="bike-card">
+
+        <img src="{{ url_for('static', filename='images/' ~ bike[4]) }}">
+
+        <div>
+            <h2>{{ bike[1] }}</h2>
+            <p>Price: ₹{{ bike[3] }}</p>
+
+            <a href="/offer/{{ bike[0] }}">View Details</a>
+        </div>
+
+    </div>
+    {% endfor %}
+
+{% else %}
+
+<div class="empty">
+    <h2>Your cart is empty 😢</h2>
+    <a href="/">Go Back Home</a>
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
